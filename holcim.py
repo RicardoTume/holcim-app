@@ -19,7 +19,7 @@ creds = Credentials.from_service_account_info(
 client = gspread.authorize(creds)
 
 # Abrir tu Google Sheet
-sheet = client.open("Avance_Proyecto_Villa1").sheet1
+sheet = client.open("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
 
 st.title("App Proyecto Holcim - Registro y Dashboard")
 
