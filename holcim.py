@@ -25,9 +25,9 @@ def conectar_google_sheet():
     return sheet
     
 # Uso correcto de la función
-sheet = conectar_google_sheet()   # 👈 aquí llamas a la función
-data = sheet.get_all_records()    # ahora sí existe sheet
-st.write(data)                    # muestra los registros en tu app
+#sheet = conectar_google_sheet()   # 👈 aquí llamas a la función
+#data = sheet.get_all_records()    # ahora sí existe sheet
+#st.write(data)                    # muestra los registros en tu app
 #creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
 #client = gspread.authorize(creds)
 
