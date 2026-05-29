@@ -8,11 +8,12 @@ from datetime import date
 
 # --- Configuración de credenciales ---
 # Descarga tu archivo JSON de credenciales de Google Cloud y guárdalo en tu proyecto
-scope = ["https://spreadsheets.google.com/feeds",
-         "https://www.googleapis.com/auth/drive"]
 creds = Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=["https://www.googleapis.com/auth/spreadsheets"]
+    st.secrets,
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
 )
 
 #creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
