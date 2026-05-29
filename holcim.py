@@ -25,7 +25,7 @@ def conectar_google_sheet():
     return sheet
     
 #creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
-client = gspread.authorize(creds)
+#client = gspread.authorize(creds)
 
 # Abrir tu Google Sheet
 #sheet = client.open_by_key("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
