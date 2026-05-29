@@ -12,7 +12,7 @@ def conectar_google_sheet():
         "https://www.googleapis.com/auth/drive"
     ]
     info = dict(st.secrets["gcp_service_account"])
-    info["private_key"] = info["private_key"].replace("\\n", "\n")
+    #info["private_key"] = info["private_key"].replace("\\n", "\n")
     #st.write(info)  # Para verificar que todas las claves están presentes
     creds = Credentials.from_service_account_info(
         info,
