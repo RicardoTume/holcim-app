@@ -6,23 +6,30 @@ from google.oauth2.service_account import Credentials
 #from oauth2client.service_account import ServiceAccountCredentials
 from datetime import date
 
-# --- Configuración de credenciales ---
-# Descarga tu archivo JSON de credenciales de Google Cloud y guárdalo en tu proyecto
-creds = Credentials.from_service_account_info(
-    st.secrets,
-    scopes=[
+def conectar_google_sheet():
+    scope = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive"
     ]
-)
+    info = dict(st.secrets["gcp_service_account"])
+    info["private_key"] = info["private_key"].replace("\\n", "\n")
+    creds = Credentials.from_service_account_info(
+        info,
+        scopes=scope
+    )
 
+    client = gspread.authorize(creds)
+    sheet = client.open_by_key("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
+
+    return sheet
+    
 #creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
 client = gspread.authorize(creds)
 
 # Abrir tu Google Sheet
-sheet = client.open_by_key("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
+#sheet = client.open_by_key("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
 
-st.title("App Proyecto Holcim - Registro y Dashboard")
+#st.title("App Proyecto Holcim - Registro y Dashboard")
 
 # --- Formulario de registro ---
 st.header("Registro Diario de Avances")
