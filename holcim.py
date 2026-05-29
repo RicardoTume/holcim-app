@@ -2,14 +2,19 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
+#from oauth2client.service_account import ServiceAccountCredentials
 from datetime import date
 
 # --- Configuración de credenciales ---
 # Descarga tu archivo JSON de credenciales de Google Cloud y guárdalo en tu proyecto
 scope = ["https://spreadsheets.google.com/feeds",
          "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
+creds = Credentials.from_service_account_file(
+    "holcim-dashboard.json",
+    scopes=["https://www.googleapis.com/auth/spreadsheets"]
+)
+#creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
 client = gspread.authorize(creds)
 
 # Abrir tu Google Sheet
