@@ -1,0 +1,70 @@
+/* Fondo general */
+body, .stApp {
+    background-color: #0b1d3a !important; /*azul oscuro uniforme */
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Iconos */
+.icono {
+    font-size: 1.8em;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Texto */
+.texto {
+    font-size: 0.9em;
+    font-weight: 600;
+}
+.texto small {
+    display: block;
+    font-size: 0.75em;
+    color: #b0c4de; /* gris azulado discreto */
+
+/* TODOS LOS BOTONES DE STREAMLIT */
+
+.stButton button {
+    background-color: #142b52 !important;
+    color: white !important;
+
+    border: none !important;
+    border-radius: 12px !important;
+
+    width: 100% !important;
+    min-height: 95px !important;
+
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
+
+/* TEXTO INTERNO */
+
+.stButton button p {
+    color: white !important;
+}
+
+/* HOVER */
+
+.stButton button:hover {
+    background-color: #1f4c8f !important;
+
+    color: white !important;
+
+    transform: scale(1.02);
+}
+
+/* CLICK */
+
+.stButton button:focus,
+.stButton button:active,
+.stButton button:focus-visible {
+
+    background-color: #1f4c8f !important;
+
+    color: white !important;
+
+    outline: none !important;
+    box-shadow: none !important;
+}
+    
