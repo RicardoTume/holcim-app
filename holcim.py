@@ -10,10 +10,11 @@ from datetime import date
 # Descarga tu archivo JSON de credenciales de Google Cloud y guárdalo en tu proyecto
 scope = ["https://spreadsheets.google.com/feeds",
          "https://www.googleapis.com/auth/drive"]
-creds = Credentials.from_service_account_file(
-    "holcim-dashboard.json",
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
     scopes=["https://www.googleapis.com/auth/spreadsheets"]
 )
+
 #creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
 client = gspread.authorize(creds)
 
