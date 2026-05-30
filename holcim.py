@@ -62,6 +62,12 @@ df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
 )
 
+st.write("Columnas AVANCES")
+st.write(df_avances.columns.tolist())
+
+st.write("Columnas GANTT")
+st.write(df_gantt.columns.tolist())
+
 # --- Formulario de registro ---
 st.header("Registro Diario de Avances")
 
