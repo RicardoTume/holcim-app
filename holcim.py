@@ -7,10 +7,26 @@ from google.oauth2.service_account import Credentials
 #from oauth2client.service_account import ServiceAccountCredentials
 from datetime import date
 
+# ----------- Modificado temporalmente ------
 def conectar_google_sheet():
-    ...
-    client = gspread.authorize(creds)
+    scope = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+    info = dict(st.secrets["gcp_service_account"])
+    
+    st.write("Email:", info.get("client_email"))
+    st.write("Project:", info.get("project_id"))
+    st.write("Tiene private key:", "private_key" in info)
+    
+    info["private_key"] = info["private_key"].replace("\\n", "\n")
+    creds = Credentials.from_service_account_info(
+        info,
+        scopes=scope
+    )
 
+    client = gspread.authorize(creds)
+    
     try:
         sheet = client.open_by_key(
             "1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U"
@@ -20,23 +36,6 @@ def conectar_google_sheet():
         raise
 
     return sheet
-# ----------- Modificado temporalmente ------
-#def conectar_google_sheet():
-    #scope = [
-        #"https://www.googleapis.com/auth/spreadsheets",
-        #"https://www.googleapis.com/auth/drive"
-    #]
-    #info = dict(st.secrets["gcp_service_account"])
-    #st.write("Email:", info.get("client_email"))
-    #st.write("Project:", info.get("project_id"))
-    #st.write("Tiene private key:", "private_key" in info)
-    #info["private_key"] = info["private_key"].replace("\\n", "\n")
-    #creds = Credentials.from_service_account_info(
-        #info,
-        #scopes=scope
-    #)
-
-    #client = gspread.authorize(creds)
     #sheet = client.open_by_key("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
 
     #return sheet
