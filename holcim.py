@@ -26,9 +26,9 @@ def conectar_google_sheet():
 
     return sheet
     
-#sheet = conectar_google_sheet()
+sheet = conectar_google_sheet()
 data = sheet.get_all_records()
-df = pd.DataFrame(data)
+#df = pd.DataFrame(data)
 
 # Uso correcto de la función
 #sheet = conectar_google_sheet()   # 👈 aquí llamas a la función
