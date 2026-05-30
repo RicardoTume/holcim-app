@@ -14,7 +14,7 @@ def conectar_google_sheet():
     ]
     info = dict(st.secrets["gcp_service_account"])
     #st.write("Cuenta de servicio usada:", info["client_email"])
-    #info["private_key"] = info["private_key"].replace("\\n", "\n")
+    info["private_key"] = info["private_key"].replace("\\n", "\n")
     #st.write(info)  # Para verificar que todas las claves están presentes
     creds = Credentials.from_service_account_info(
         info,
