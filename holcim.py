@@ -51,8 +51,8 @@ def conectar_google_sheet():
 
 spreadsheet = conectar_google_sheet()
 
-hoja_avances = spreadsheet.worksheet("AVANCES")
-hoja_gantt = spreadsheet.worksheet("GANTT")
+hoja_avances = spreadsheet.worksheet("Avances")
+hoja_gantt = spreadsheet.worksheet("Gantt")
 
 df_avances = pd.DataFrame(
     hoja_avances.get_all_records()
@@ -62,10 +62,10 @@ df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
 )
 
-st.write("Columnas AVANCES")
+st.write("Columnas Avances")
 st.write(df_avances.columns.tolist())
 
-st.write("Columnas GANTT")
+st.write("Columnas Gantt")
 st.write(df_gantt.columns.tolist())
 
 # --- Formulario de registro ---
