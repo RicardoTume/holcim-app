@@ -15,9 +15,9 @@ def conectar_google_sheet():
     ]
     info = dict(st.secrets["gcp_service_account"])
     
-    st.write("Email:", info.get("client_email"))
-    st.write("Project:", info.get("project_id"))
-    st.write("Tiene private key:", "private_key" in info)
+    #st.write("Email:", info.get("client_email"))
+    #st.write("Project:", info.get("project_id"))
+    #st.write("Tiene private key:", "private_key" in info)
     
     info["private_key"] = info["private_key"].replace("\\n", "\n")
     creds = Credentials.from_service_account_info(
@@ -28,34 +28,39 @@ def conectar_google_sheet():
     client = gspread.authorize(creds)
     
     try:
-        sheet = client.open_by_key(
-            "1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U"
-        ).sheet1
+        spreadsheet = client.open_by_key(
+        "1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U"
+        )
+        #sheet = client.open_by_key(
+            #"1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U"
+        #).sheet1
     except Exception:
         st.code(traceback.format_exc())
         raise
 
-    return sheet
+    return spreadsheet
+    #return sheet
     #sheet = client.open_by_key("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
 
     #return sheet
 # -------- fin de la modificacio -------    
 
-sheet = conectar_google_sheet()
-data = sheet.get_all_records()
-df = pd.DataFrame(data)
+#sheet = conectar_google_sheet()
+#data = sheet.get_all_records()
+#df = pd.DataFrame(data)
 
-# Uso correcto de la función
-#sheet = conectar_google_sheet()   # 👈 aquí llamas a la función
-#data = sheet.get_all_records()    # ahora sí existe sheet
-#st.write(data)                    # muestra los registros en tu app
-#creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
-#client = gspread.authorize(creds)
+spreadsheet = conectar_google_sheet()
 
-# Abrir tu Google Sheet
-#sheet = client.open_by_key("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
+hoja_avances = spreadsheet.worksheet("AVANCES")
+hoja_gantt = spreadsheet.worksheet("GANTT")
 
-#st.title("App Proyecto Holcim - Registro y Dashboard")
+df_avances = pd.DataFrame(
+    hoja_avances.get_all_records()
+)
+
+df_gantt = pd.DataFrame(
+    hoja_gantt.get_all_records()
+)
 
 # --- Formulario de registro ---
 st.header("Registro Diario de Avances")
