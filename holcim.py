@@ -7,7 +7,7 @@ from google.oauth2.service_account import Credentials
 from datetime import date
 
 def conectar_google_sheet():
-    data= sheet.get_all_records()
+    #data= sheet.get_all_records()
     scope = [
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive"
@@ -25,6 +25,10 @@ def conectar_google_sheet():
 
     return sheet
     
+sheet = conectar_google_sheet()
+data = sheet.get_all_records()
+df = pd.DataFrame(data)
+
 # Uso correcto de la función
 #sheet = conectar_google_sheet()   # 👈 aquí llamas a la función
 #data = sheet.get_all_records()    # ahora sí existe sheet
