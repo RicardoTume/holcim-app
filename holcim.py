@@ -2,32 +2,46 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import gspread
+import traceback
 from google.oauth2.service_account import Credentials
 #from oauth2client.service_account import ServiceAccountCredentials
 from datetime import date
 
 def conectar_google_sheet():
-    #data= sheet.get_all_records()
-    scope = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
-    info = dict(st.secrets["gcp_service_account"])
-    st.write("Email:", info.get("client_email"))
-    st.write("Project:", info.get("project_id"))
-    st.write("Tiene private key:", "private_key" in info)
-    info["private_key"] = info["private_key"].replace("\\n", "\n")
-    #st.write(info)  # Para verificar que todas las claves están presentes
-    creds = Credentials.from_service_account_info(
-        info,
-        scopes=scope
-    )
-
+    ...
     client = gspread.authorize(creds)
-    sheet = client.open_by_key("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
+
+    try:
+        sheet = client.open_by_key(
+            "1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U"
+        ).sheet1
+    except Exception:
+        st.code(traceback.format_exc())
+        raise
 
     return sheet
-    
+# ----------- Modificado temporalmente ------
+#def conectar_google_sheet():
+    #scope = [
+        #"https://www.googleapis.com/auth/spreadsheets",
+        #"https://www.googleapis.com/auth/drive"
+    #]
+    #info = dict(st.secrets["gcp_service_account"])
+    #st.write("Email:", info.get("client_email"))
+    #st.write("Project:", info.get("project_id"))
+    #st.write("Tiene private key:", "private_key" in info)
+    #info["private_key"] = info["private_key"].replace("\\n", "\n")
+    #creds = Credentials.from_service_account_info(
+        #info,
+        #scopes=scope
+    #)
+
+    #client = gspread.authorize(creds)
+    #sheet = client.open_by_key("1hdQbE3Emhpn8YSbN2KM-yYwTgOXvC2fRkPXkxut5N3U").sheet1
+
+    #return sheet
+# -------- fin de la modificacio -------    
+
 sheet = conectar_google_sheet()
 data = sheet.get_all_records()
 df = pd.DataFrame(data)
