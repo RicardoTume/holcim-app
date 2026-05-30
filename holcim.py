@@ -68,10 +68,27 @@ st.write(df_avances.columns.tolist())
 st.write("Columnas Gantt")
 st.write(df_gantt.columns.tolist())
 
+# agregado de chatgpt
+opciones_tareas = (
+    df_gantt["EDT"].astype(str)
+    + " - "
+    + df_gantt["Nombre"].astype(str)
+).tolist()
+
 # --- Formulario de registro ---
 st.header("Registro Diario de Avances")
 
-tarea = st.text_input("Tarea")
+#tarea = st.text_input("Tarea")
+tarea = st.selectbox(
+    "Actividad",
+    opciones_tareas
+)
+edt = tarea.split(" - ")[0]
+nombre_tarea = tarea.split(" - ", 1)[1]
+
+st.write("EDT:", edt)
+st.write("Actividad:", nombre_tarea)
+
 responsable = st.text_input("Responsable")
 fecha_inicio = st.date_input("Fecha Inicio")
 fecha_fin = st.date_input("Fecha Fin")
