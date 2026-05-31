@@ -63,6 +63,35 @@ df_gantt = pd.DataFrame(
 )
 
 # Añadido por avances con chatgpt
+st.subheader("🚨 Actividades sin Avance Registrado")
+
+actividades_gantt = set(
+    (
+        df_gantt["EDT"].astype(str)
+        + " - "
+        + df_gantt["Nombre"].astype(str)
+    )
+)
+
+actividades_avances = set(
+    df_avances["Tarea"].astype(str)
+)
+
+sin_avance = sorted(
+    actividades_gantt - actividades_avances
+)
+
+st.write(
+    f"Actividades sin seguimiento: {len(sin_avance)}"
+)
+
+st.dataframe(
+    pd.DataFrame(
+        {"Actividades pendientes de registrar": sin_avance}
+    )
+)
+# ----------------------------------------------------------
+# Añadido por avances con chatgpt
 total_actividades = len(df_gantt)
 
 actividades_reportadas = (
@@ -95,11 +124,11 @@ c3.metric(
     f"{porcentaje_cobertura:.1f}%"
 )
 # ------------------------------------------------#
-st.write("Columnas Avances")
-st.write(df_avances.columns.tolist())
+#st.write("Columnas Avances")
+#st.write(df_avances.columns.tolist())
 
-st.write("Columnas Gantt")
-st.write(df_gantt.columns.tolist())
+#st.write("Columnas Gantt")
+#st.write(df_gantt.columns.tolist())
 
 # agregado de chatgpt
 opciones_tareas = (
@@ -119,8 +148,8 @@ tarea = st.selectbox(
 edt = tarea.split(" - ")[0]
 nombre_tarea = tarea.split(" - ", 1)[1]
 
-st.write("EDT:", edt)
-st.write("Actividad:", nombre_tarea)
+#st.write("EDT:", edt)
+#st.write("Actividad:", nombre_tarea)
 
 responsable = st.text_input("Responsable")
 fecha_inicio = st.date_input("Fecha Inicio")
