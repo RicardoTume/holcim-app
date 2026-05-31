@@ -62,6 +62,39 @@ df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
 )
 
+# Añadido por avances con chatgpt
+total_actividades = len(df_gantt)
+
+actividades_reportadas = (
+    df_avances["Tarea"]
+    .nunique()
+)
+
+porcentaje_cobertura = (
+    actividades_reportadas
+    / total_actividades
+    * 100
+)
+
+st.subheader("📊 Cobertura del Seguimiento")
+
+c1, c2, c3 = st.columns(3)
+
+c1.metric(
+    "Actividades GANTT",
+    total_actividades
+)
+
+c2.metric(
+    "Con Avance",
+    actividades_reportadas
+)
+
+c3.metric(
+    "Cobertura",
+    f"{porcentaje_cobertura:.1f}%"
+)
+# ------------------------------------------------#
 st.write("Columnas Avances")
 st.write(df_avances.columns.tolist())
 
