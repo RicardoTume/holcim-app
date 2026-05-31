@@ -96,11 +96,26 @@ avance = st.slider("% Avance", 0, 100, 0)
 observaciones = st.text_area("Observaciones")
 estado = st.selectbox("Estado", ["Pendiente", "En curso", "Terminado"])
 
+#if st.button("Guardar avance"):
+    #sheet.append_row([tarea, responsable, str(fecha_inicio), str(fecha_fin),
+                      #avance, observaciones, estado])
+    #st.success("✅ Avance registrado correctamente en Google Sheets")
 if st.button("Guardar avance"):
-    sheet.append_row([tarea, responsable, str(fecha_inicio), str(fecha_fin),
-                      avance, observaciones, estado])
-    st.success("✅ Avance registrado correctamente en Google Sheets")
+    try:
+        hoja_avances.append_row([
+            tarea,
+            responsable,
+            str(fecha_inicio),
+            str(fecha_fin),
+            avance,
+            observaciones,
+            estado
+        ])
 
+        st.success("✅ Avance registrado correctamente")
+
+    except Exception as e:
+        st.error(f"Error: {e}")
 # --- Dashboard con agujas ---
 st.header("Dashboard de Avance")
 
