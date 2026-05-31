@@ -92,6 +92,8 @@ st.dataframe(
 )
 # ----------------------------------------------------------
 # Añadido por avances con chatgpt
+st.write(df_gantt.dtypes)
+
 total_actividades = len(df_gantt)
 
 actividades_reportadas = (
