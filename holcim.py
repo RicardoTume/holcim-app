@@ -62,6 +62,17 @@ df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
 )
 
+# añadido por avances con chatgpt
+df_gantt["Comienzo"] = pd.to_datetime(
+    df_gantt["Comienzo"],
+    errors="coerce"
+)
+
+df_gantt["Fin"] = pd.to_datetime(
+    df_gantt["Fin"],
+    errors="coerce"
+)
+# -----------------------------------
 # Añadido por avances con chatgpt
 st.subheader("🚨 Actividades sin Avance Registrado")
 
@@ -91,6 +102,27 @@ st.dataframe(
     )
 )
 # ----------------------------------------------------------
+# Añadido por avances con chatgpt
+from datetime import datetime
+
+st.subheader("🔴 Actividades Vencidas")
+
+hoy = pd.Timestamp.today().normalize()
+
+vencidas = df_gantt[
+    df_gantt["Fin"] < hoy
+]
+
+st.write(
+    f"Actividades cuyo fin planificado ya pasó: {len(vencidas)}"
+)
+
+st.dataframe(
+    vencidas[
+        ["EDT", "Nombre", "Comienzo", "Fin"]
+    ]
+)
+# -------------------------------------------------------
 # Añadido por avances con chatgpt
 st.write(df_gantt.dtypes)
 
