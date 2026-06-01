@@ -101,6 +101,26 @@ st.dataframe(
         {"Actividades pendientes de registrar": sin_avance}
     )
 )
+# Añadido por avances con chatgpt
+st.subheader("🟡 Próximas a Vencer")
+
+hoy = pd.Timestamp.today().normalize()
+
+proximas = df_gantt[
+    (df_gantt["Fin"] >= hoy) &
+    (df_gantt["Fin"] <= hoy + pd.Timedelta(days=7))
+]
+
+st.write(
+    f"Actividades que vencen en los próximos 7 días: {len(proximas)}"
+)
+
+st.dataframe(
+    proximas[
+        ["EDT", "Nombre", "Comienzo", "Fin"]
+    ]
+)
+# -----------------------------------------------------------
 # ----------------------------------------------------------
 # Añadido por avances con chatgpt
 from datetime import datetime
