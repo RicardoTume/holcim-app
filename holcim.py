@@ -65,6 +65,7 @@ st.write(df_gantt.columns.tolist())
 
 st.write(df_gantt.iloc[0].to_dict())
 
+st.write(df_gantt["Fin"].head(5))
 # añadido por avances con chatgpt
 df_gantt["Comienzo"] = pd.to_datetime(
     df_gantt["Comienzo"],
