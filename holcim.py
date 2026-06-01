@@ -61,6 +61,53 @@ df_avances = pd.DataFrame(
 df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
 )
+# añadido ------
+df_avances = pd.DataFrame(
+    hoja_avances.get_all_records()
+)
+
+df_gantt = pd.DataFrame(
+    hoja_gantt.get_all_records()
+)
+
+# ===== CONVERSIÓN DE FECHAS DEL GANTT =====
+
+meses = {
+    "enero": "January",
+    "febrero": "February",
+    "marzo": "March",
+    "abril": "April",
+    "mayo": "May",
+    "junio": "June",
+    "julio": "July",
+    "agosto": "August",
+    "septiembre": "September",
+    "octubre": "October",
+    "noviembre": "November",
+    "diciembre": "December"
+}
+
+for mes_es, mes_en in meses.items():
+    df_gantt["Comienzo"] = df_gantt["Comienzo"].str.replace(
+        mes_es, mes_en, regex=False
+    )
+
+    df_gantt["Fin"] = df_gantt["Fin"].str.replace(
+        mes_es, mes_en, regex=False
+    )
+
+df_gantt["Comienzo"] = pd.to_datetime(
+    df_gantt["Comienzo"],
+    errors="coerce"
+)
+
+df_gantt["Fin"] = pd.to_datetime(
+    df_gantt["Fin"],
+    errors="coerce"
+)
+# ------------------------------------
+# ===== DESDE AQUÍ YA PUEDES USAR FECHAS =====
+
 st.write(df_gantt.columns.tolist())
 
 st.write(df_gantt.iloc[0].to_dict())
@@ -146,6 +193,10 @@ hoy = pd.Timestamp.today().normalize()
 vencidas = df_gantt[
     df_gantt["Fin"] < hoy
 ]
+
+st.write("Fecha mínima:", df_gantt["Fin"].min())
+st.write("Fecha máxima:", df_gantt["Fin"].max())
+st.write("Fechas vacías:", df_gantt["Fin"].isna().sum())
 
 st.write(
     f"Actividades cuyo fin planificado ya pasó: {len(vencidas)}"
