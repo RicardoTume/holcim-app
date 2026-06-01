@@ -65,11 +65,13 @@ df_gantt = pd.DataFrame(
 # añadido por avances con chatgpt
 df_gantt["Comienzo"] = pd.to_datetime(
     df_gantt["Comienzo"],
+    dayfirst=True,
     errors="coerce"
 )
 
 df_gantt["Fin"] = pd.to_datetime(
     df_gantt["Fin"],
+    dayfirst=True,
     errors="coerce"
 )
 # -----------------------------------
@@ -124,6 +126,14 @@ st.dataframe(
 # ----------------------------------------------------------
 # Añadido por avances con chatgpt
 from datetime import datetime
+
+st.write("Fecha mínima Fin:", df_gantt["Fin"].min())
+st.write("Fecha máxima Fin:", df_gantt["Fin"].max())
+st.write("Fechas vacías:", df_gantt["Fin"].isna().sum())
+
+st.dataframe(
+    df_gantt[["EDT", "Nombre", "Fin"]].head(10)
+)
 
 st.subheader("🔴 Actividades Vencidas")
 
