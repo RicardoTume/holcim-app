@@ -182,9 +182,9 @@ from datetime import datetime
 #st.write("Fecha máxima Fin:", df_gantt["Fin"].max())
 #st.write("Fechas vacías:", df_gantt["Fin"].isna().sum())
 
-st.dataframe(
-    df_gantt[["EDT", "Nombre", "Fin"]].head(10)
-)
+#st.dataframe(
+    #df_gantt[["EDT", "Nombre", "Fin"]].head(10)
+#)
 
 st.subheader("🔴 Actividades Vencidas")
 
