@@ -60,6 +60,9 @@ df_avances = pd.DataFrame(
 st.write("Filas avances:", len(df_avances))
 st.write(df_avances.columns.tolist())
 st.dataframe(df_avances.head(10))
+
+st.write("Columnas:")
+st.write(df_avances.columns)
 # añadido de chatgpt -------
 df_ultimo_avance = (
     df_avances
