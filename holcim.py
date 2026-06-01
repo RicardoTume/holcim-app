@@ -269,7 +269,23 @@ nombre_tarea = tarea.split(" - ", 1)[1]
 
 #st.write("EDT:", edt)
 #st.write("Actividad:", nombre_tarea)
+# añadido de chatgpt --------
+fila_gantt = df_gantt[
+    df_gantt["EDT"].astype(str) == edt
+]
 
+if not fila_gantt.empty:
+
+    inicio_plan = fila_gantt.iloc[0]["Comienzo"]
+    fin_plan = fila_gantt.iloc[0]["Fin"]
+    duracion_plan = fila_gantt.iloc[0]["Duración"]
+
+    st.info(
+        f"📅 Inicio Plan: {inicio_plan.strftime('%d/%m/%Y')} | "
+        f"Fin Plan: {fin_plan.strftime('%d/%m/%Y')} | "
+        f"Duración: {duracion_plan}"
+    )
+# --------------------------------------------------------------    
 responsable = st.text_input("Responsable")
 fecha_inicio = st.date_input("Fecha Inicio")
 fecha_fin = st.date_input("Fecha Fin")
