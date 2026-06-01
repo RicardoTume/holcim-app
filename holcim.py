@@ -57,7 +57,9 @@ hoja_gantt = spreadsheet.worksheet("Gantt")
 df_avances = pd.DataFrame(
     hoja_avances.get_all_records()
 )
-
+st.write("Filas avances:", len(df_avances))
+st.write(df_avances.columns.tolist())
+st.dataframe(df_avances.head(10))
 # añadido de chatgpt -------
 df_ultimo_avance = (
     df_avances
