@@ -76,14 +76,6 @@ df_ultimo_avance["EDT"] = (
     .str[0]
 )
 
-df_control = pd.merge(
-    df_gantt,
-    df_ultimo_avance[
-        ["EDT", "Estado", "%_Avance"]
-    ],
-    on="EDT",
-    how="left"
-)
 # -----------------------------------
 st.subheader("Último avance por actividad")
 
@@ -91,6 +83,15 @@ st.dataframe(df_ultimo_avance)
 # --------------------------------------
 df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
+)
+
+df_control = pd.merge(
+    df_gantt,
+    df_ultimo_avance[
+        ["EDT", "Estado", "%_Avance"]
+    ],
+    on="EDT",
+    how="left"
 )
 # añadido ------
 #df_avances = pd.DataFrame(
