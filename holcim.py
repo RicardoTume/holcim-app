@@ -58,6 +58,16 @@ df_avances = pd.DataFrame(
     hoja_avances.get_all_records()
 )
 
+# añadido de chatgpt -------
+df_ultimo_avance = (
+    df_avances
+    .groupby("Tarea", as_index=False)
+    .last()
+)
+st.subheader("Último avance por actividad")
+
+st.dataframe(df_ultimo_avance)
+# --------------------------------------
 df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
 )
