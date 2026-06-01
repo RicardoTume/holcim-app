@@ -69,6 +69,22 @@ df_ultimo_avance = (
     .groupby("Tarea", as_index=False)
     .last()
 )
+# Extraer EDT desde la tarea registrada
+df_ultimo_avance["EDT"] = (
+    df_ultimo_avance["Tarea"]
+    .str.split(" - ")
+    .str[0]
+)
+
+df_control = pd.merge(
+    df_gantt,
+    df_ultimo_avance[
+        ["EDT", "Estado", "%_Avance"]
+    ],
+    on="EDT",
+    how="left"
+)
+# -----------------------------------
 st.subheader("Último avance por actividad")
 
 st.dataframe(df_ultimo_avance)
@@ -223,6 +239,35 @@ st.dataframe(
     ]
 )
 # -------------------------------------------------------
+# -------------- chatgpt --------------
+st.subheader("🔴 Actividades Atrasadas")
+
+hoy = pd.Timestamp.today().normalize()
+
+atrasadas = df_control[
+    (df_control["Fin"] < hoy) &
+    (
+        df_control["Estado"].isna() |
+        (df_control["Estado"] != "Terminado")
+    )
+]
+
+st.write(
+    f"Actividades atrasadas: {len(atrasadas)}"
+)
+
+st.dataframe(
+    atrasadas[
+        [
+            "EDT",
+            "Nombre",
+            "Fin",
+            "Estado",
+            "%_Avance"
+        ]
+    ]
+)
+# ------------------------------------------
 # Añadido por avances con chatgpt
 #st.write(df_gantt.dtypes)
 
