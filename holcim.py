@@ -61,6 +61,9 @@ df_avances = pd.DataFrame(
 df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
 )
+st.write(df_gantt.columns.tolist())
+
+st.write(df_gantt.iloc[0].to_dict())
 
 # añadido por avances con chatgpt
 df_gantt["Comienzo"] = pd.to_datetime(
