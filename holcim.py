@@ -62,13 +62,13 @@ df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
 )
 # añadido ------
-df_avances = pd.DataFrame(
-    hoja_avances.get_all_records()
-)
+#df_avances = pd.DataFrame(
+    #hoja_avances.get_all_records()
+#)
 
-df_gantt = pd.DataFrame(
-    hoja_gantt.get_all_records()
-)
+#df_gantt = pd.DataFrame(
+    #hoja_gantt.get_all_records()
+#)
 
 # ===== CONVERSIÓN DE FECHAS DEL GANTT =====
 
@@ -108,11 +108,11 @@ df_gantt["Fin"] = pd.to_datetime(
 # ------------------------------------
 # ===== DESDE AQUÍ YA PUEDES USAR FECHAS =====
 
-st.write(df_gantt.columns.tolist())
+#st.write(df_gantt.columns.tolist())
 
-st.write(df_gantt.iloc[0].to_dict())
+#st.write(df_gantt.iloc[0].to_dict())
 
-st.write(df_gantt["Fin"].head(5))
+#st.write(df_gantt["Fin"].head(5))
 # añadido por avances con chatgpt
 df_gantt["Comienzo"] = pd.to_datetime(
     df_gantt["Comienzo"],
