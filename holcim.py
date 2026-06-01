@@ -178,9 +178,9 @@ st.dataframe(
 # Añadido por avances con chatgpt
 from datetime import datetime
 
-st.write("Fecha mínima Fin:", df_gantt["Fin"].min())
-st.write("Fecha máxima Fin:", df_gantt["Fin"].max())
-st.write("Fechas vacías:", df_gantt["Fin"].isna().sum())
+#st.write("Fecha mínima Fin:", df_gantt["Fin"].min())
+#st.write("Fecha máxima Fin:", df_gantt["Fin"].max())
+#st.write("Fechas vacías:", df_gantt["Fin"].isna().sum())
 
 st.dataframe(
     df_gantt[["EDT", "Nombre", "Fin"]].head(10)
