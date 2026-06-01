@@ -289,7 +289,13 @@ if not fila_gantt.empty:
 responsable = st.text_input("Responsable")
 fecha_inicio = st.date_input("Fecha Inicio")
 fecha_fin = st.date_input("Fecha Fin")
-avance = st.slider("% Avance", 0, 100, 0)
+#avance = st.slider("% Avance", 0, 100, 0)
+avance = st.number_input(
+    "% Avance",
+    min_value=0,
+    max_value=100,
+    value=0
+)
 observaciones = st.text_area("Observaciones")
 estado = st.selectbox("Estado", ["Pendiente", "En curso", "Terminado"])
 
