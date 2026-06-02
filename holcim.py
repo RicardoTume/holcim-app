@@ -93,6 +93,11 @@ df_control = pd.merge(
     on="EDT",
     how="left"
 )
+# añadido --------
+df_control["Fin"] = pd.to_datetime(
+    df_control["Fin"],
+    errors="coerce"
+)
 # añadido ------
 #df_avances = pd.DataFrame(
     #hoja_avances.get_all_records()
