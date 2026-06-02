@@ -241,6 +241,9 @@ st.dataframe(
 )
 # -------------------------------------------------------
 # -------------- chatgpt --------------
+st.write(df_control["Fin"].dtype)
+st.write(df_control[["EDT","Nombre","Fin"]].head())
+
 st.subheader("🔴 Actividades Atrasadas")
 
 hoy = pd.Timestamp.today().normalize()
