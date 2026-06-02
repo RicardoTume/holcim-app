@@ -85,6 +85,19 @@ df_gantt = pd.DataFrame(
     hoja_gantt.get_all_records()
 )
 
+# añadido ------------
+df_gantt["EDT"] = (
+    df_gantt["EDT"]
+    .astype(str)
+    .str.strip()
+)
+
+df_ultimo_avance["EDT"] = (
+    df_ultimo_avance["EDT"]
+    .astype(str)
+    .str.strip()
+)
+# ------------------------------
 df_control = pd.merge(
     df_gantt,
     df_ultimo_avance[
@@ -93,6 +106,16 @@ df_control = pd.merge(
     on="EDT",
     how="left"
 )
+# agragado temporalmente -----
+st.dataframe(
+    df_control[
+        ["EDT", "Nombre", "Estado", "%_Avance"]
+    ].head(20)
+)
+
+st.write(df_gantt["EDT"].head(5).tolist())
+st.write(df_ultimo_avance["EDT"].head(5).tolist())
+# -------------------------------------------
 # añadido --------
 df_control["Fin"] = pd.to_datetime(
     df_control["Fin"],
