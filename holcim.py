@@ -97,6 +97,13 @@ df_ultimo_avance["EDT"] = (
     .astype(str)
     .str.strip()
 )
+# -------añadido ------
+st.write("Columnas Gantt")
+st.write(df_gantt.columns.tolist())
+
+st.write(df_gantt[["EDT", "Nombre", "Fin"]].head())
+
+st.write(df_gantt["Fin"].dtype)
 # ------------------------------
 df_control = pd.merge(
     df_gantt,
@@ -165,6 +172,9 @@ df_gantt["Fin"] = pd.to_datetime(
     df_gantt["Fin"],
     errors="coerce"
 )
+#---------- añadido -----
+st.write("Fechas convertidas")
+st.write(df_gantt[["EDT", "Fin"]].head(10))
 # ------------------------------------
 # ===== DESDE AQUÍ YA PUEDES USAR FECHAS =====
 
